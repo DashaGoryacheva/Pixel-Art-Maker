@@ -12,16 +12,26 @@ const y = form.elements['height'];
 const x = form.elements['width'];
 let yVal = y.value;
 let xVal = x.value;
-let numClick=0;
+let numClick = 0;
+
 tbl.appendChild(tblHead);
 tbl.appendChild(tblBody);
+//
 thirdInput.addEventListener('click', countClick);
-function countClick(){
-numClick++;
+function countClick() {
+    numClick++;
 };
+//thirdInput.addEventListener('click', funcRemove)
+//function funcRemove(){
+//tblBody.removeChild(c);
+// c.removeChild(r);
+//}
+
+
 thirdInput.addEventListener('click', makeGrid);
 function makeGrid(event) {
-    if (numClick%2 !== 0) {
+
+    if (numClick % 2 !== 0) {
         event.preventDefault();
         yVal = y.value;
         xVal = x.value;
@@ -34,8 +44,23 @@ function makeGrid(event) {
             tblBody.appendChild(column);
         }
     }
+
     else {
-        thirdInput.removeEventListener('click', makeGrid);
+        let c = document.querySelectorALL('tr');
+        let r = document.querySelectorALL('td');
+        tblBody.removeChild(c);
+        c.removeChild(r);
+        event.preventDefault();
+        yVal = y.value;
+        xVal = x.value;
+        for (let i = 1; i <= xVal; i++) {
+            let column = document.createElement('tr');
+            for (let j = 1; j <= yVal; j++) {
+                let row = document.createElement('td');
+                column.appendChild(row);
+            }
+            tblBody.appendChild(column);
+        }
     }
 }
 tblBody.addEventListener('click', userBkground);
